@@ -8,6 +8,7 @@ package com.chentx.attempts.attempt01;
  * @since JDK17
  */
 
+
 public class Material {
     /**
      * 货物名称

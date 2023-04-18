@@ -12,6 +12,7 @@ import java.awt.*;
  * 生成树
  *
  * 还有问题，不算完成
+ * Exception in thread "main" java.lang.NullPointerException: Cannot store to object array because "nodes" is null
  *
  * @author MaxBrooks chentingxian195467@163.com
  * @version 2023/2/16 14:59
@@ -24,20 +25,17 @@ public class TreeWin extends JFrame implements TreeSelectionListener {
      * 种树（冷笑话）
      */
     JTree jTree;
-
     /**
      * 显示信息
      */
     JTextArea jTextArea;
-
     /**
      * 材料规格表的数据记录
      */
     String[][] materialSpecificationSheet;
-
     DBConnection dbConnection = new DBConnection();
 
-    private void treeNodesSort(){
+    private void treeNodesSort() throws NullPointerException{
         materialSpecificationSheet = dbConnection.getRecord();
 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("材料");
@@ -63,7 +61,7 @@ public class TreeWin extends JFrame implements TreeSelectionListener {
         setLayout(new GridLayout(1,2));
         add(new JScrollPane(jTree));
         add(new JScrollPane(jTextArea));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setBounds(80,80,600,500);
         Font f = new Font("宋体",Font.PLAIN,22);
@@ -72,6 +70,7 @@ public class TreeWin extends JFrame implements TreeSelectionListener {
     }
 
 
+    @Override
     public void valueChanged(TreeSelectionEvent e){
         DefaultMutableTreeNode node=
                 (DefaultMutableTreeNode)jTree.getLastSelectedPathComponent();
